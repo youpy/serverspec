@@ -33,7 +33,7 @@ module Serverspec
       def add_pre_command(cmd)
         path = Serverspec.configuration.path || RSpec.configuration.path
         if Serverspec.configuration.pre_command
-          cmd = "#{Serverspec.configuration.pre_command} && #{cmd}"
+          cmd = "#{Serverspec.configuration.pre_command} >/dev/null 2>&1 && #{cmd}"
           cmd = "env PATH=#{path}:$PATH #{cmd}" if path
         end
         cmd
